@@ -1,5 +1,7 @@
 "use strict";
+// Making voting app for goats
 
+//global variables for
 let votingArea = document.getElementById("voting-area");
 let resultsArea = document.getElementById("voting-area");
 
