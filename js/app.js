@@ -51,6 +51,7 @@ function handleGoatClick(event) {
 let theBestGoat;
 for (let i = 0; i < goatArray.length; i++) {
   let goat = goatArray[i];
+  let goatName = goat.Name;
   if (goat.name === goatName) {
     theBestGoat = goat;
   }
