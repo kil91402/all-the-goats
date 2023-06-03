@@ -48,6 +48,16 @@ function handleGoatClick(event) {
   let goatName = target.alt;
 }
 
+let theBestGoat;
+for (let i = 0; i < goatArray.length; i++) {
+  let goat = goatArray[i];
+  if (goat.name === goatName) {
+    theBestGoat = goat;
+  }
+}
+
+theBestGoat.voteCount++;
+
 //add the eventHandler
 votingArea.addEventListener("click", handleGoatClick);
 
