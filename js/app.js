@@ -65,12 +65,17 @@ votingArea.addEventListener("click", handleGoatClick);
 //voting machine
 
 function renderResults() {
+  let goatUL = document.createElement("ul");
   for (let i = 0; i < goatArray.length; i++) {
     let goat = goatArray[i];
     let goatName = goat.Name;
     let goatVoteCount = goat.voteCount;
     let report = `The goat names ${goatName} got ${goatVoteCount} votes.`;
+    let goatLI = document.createElement("li");
+    goatLI.textContent = report;
+    goatUL.appendChild(goatLI);
   }
+  resultsArea.appendChild(goatUL);
 }
 let showResultsButton = document.getElementById("show-results-button");
 showResultsButton.addEventListener("click", renderResults);
