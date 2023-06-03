@@ -3,7 +3,7 @@
 
 //global variables for
 let votingArea = document.getElementById("voting-area");
-let resultsArea = document.getElementById("voting-area");
+let resultsArea = document.getElementById("results-area");
 
 let goat1Img = document.getElementById("goat1");
 let goat2Img = document.getElementById("goat2");
@@ -15,15 +15,13 @@ function Goat(name, imgSrc) {
   this.viewCount = 0;
 }
 
-let cruisinGoat = new Goat("CruisinGoat", "./img/cruisin-goat.jpg");
-let floatGoat = new Goat("FloatYourGoat", "./img/float-your-goat.jpg");
+let cruisinGoat = new Goat("Cruisin-Goat", "./img/cruisin-goat.jpg");
+let floatGoat = new Goat("Float-Your-Goat", "./img/float-your-goat.jpg");
 
 let goatArray = [];
 
 goatArray.push(cruisinGoat);
 goatArray.push(floatGoat);
-
-console.log(goatArray);
 
 //make this random goats
 // input: goat objects
@@ -43,28 +41,29 @@ setGoatImages(goatArray[0], goatArray[1]);
 
 //define the eventHandler
 function handleGoatClick(event) {
+  console.log("clicked!!");
   event.preventDefault();
   let target = event.target;
   let goatName = target.alt;
-}
+  console.log(goatName);
 
-let theBestGoat;
-for (let i = 0; i < goatArray.length; i++) {
-  let goat = goatArray[i];
-  let goatName = goat.Name;
-  if (goat.name === goatName) {
-    theBestGoat = goat;
+  let theBestGoat;
+  for (let i = 0; i < goatArray.length; i++) {
+    let goat = goatArray[i];
+    if (goat.name === target.alt) {
+      theBestGoat = goat;
+    }
   }
+  theBestGoat.voteCount++;
+  console.log(theBestGoat.voteCount);
 }
-
-theBestGoat.voteCount++;
-
 //add the eventHandler
 votingArea.addEventListener("click", handleGoatClick);
 
 //voting machine
 
 function renderResults() {
+  resultsArea.innerHTML = "";
   let goatUL = document.createElement("ul");
   for (let i = 0; i < goatArray.length; i++) {
     let goat = goatArray[i];
