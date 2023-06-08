@@ -15,17 +15,28 @@ function Goat(name, imgSrc) {
   this.viewCount = 0;
 }
 
-let cruisinGoat = new Goat("Cruisin-Goat", "./img/cruisin-goat.jpg");
-let floatGoat = new Goat("Float-Your-Goat", "./img/float-your-goat.jpg");
+let cruisinGoat = new Goat("cruisin-goat", "./img/cruisin-goat.jpg");
+let floatGoat = new Goat("float-your-goat", "./img/float-your-goat.jpg");
+let goatAway = new Goat("goat-away", "./img/goat-away.jpg");
+let goatLogo = new Goat("goat-logo", "./img/goat-logo.png");
+let goatOutofHand = new Goat("goat-out-of-hand", "./img/goat-out-of-hand.jpg");
+let kissingGoat = new Goat("kissing-goat", "./img/kissing-goat.jpg");
+let sassyGoat = new Goat("sassy-goat", "./img/sassy-goat.jpg");
+let smilingGoat = new Goat("smiling-goat", "./img/smiling-goat.jpg");
+let sweaterGoat = new Goat("sweater-goat", "./img/float-your-goat.jpg");
 
 let goatArray = [];
 
 goatArray.push(cruisinGoat);
 goatArray.push(floatGoat);
+goatArray.push(goatAway);
+goatArray.push(goatLogo);
+goatArray.push(goatOutofHand);
+goatArray.push(kissingGoat);
+goatArray.push(sassyGoat);
+goatArray.push(smilingGoat);
+goatArray.push(sweaterGoat);
 
-//make this random goats
-// input: goat objects
-// it take in goat objects and puts them into the dom
 function setGoatImages(goat1, goat2) {
   goat1Img.src = goat1.imgSrc;
   goat1Img.alt = goat1.name;
@@ -35,9 +46,23 @@ function setGoatImages(goat1, goat2) {
   goat2Img.title = goat2.name;
 }
 
-setGoatImages(goatArray[0], goatArray[1]);
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
 
-//get the elements
+function setRandomGoatImages() {
+  let goatIndex1 = getRandomInt(goatArray.length);
+  let goatIndex2 = getRandomInt(goatArray.length);
+  let goat1 = goatArray[goatIndex1];
+  let goat2 = goatArray[goatIndex2];
+  while (goatIndex1 === goatIndex2) {
+    goatIndex1 = getRandomInt(goatArray.length);
+    goatIndex2 = getRandomInt(goatArray.length);
+  }
+  setGoatImages(goat1, goat2);
+}
+
+setRandomGoatImages();
 
 //define the eventHandler
 function handleGoatClick(event) {
@@ -56,6 +81,7 @@ function handleGoatClick(event) {
   }
   theBestGoat.voteCount++;
   console.log(theBestGoat.voteCount);
+  setRandomGoatImages();
 }
 //add the eventHandler
 votingArea.addEventListener("click", handleGoatClick);
@@ -67,7 +93,7 @@ function renderResults() {
   let goatUL = document.createElement("ul");
   for (let i = 0; i < goatArray.length; i++) {
     let goat = goatArray[i];
-    let goatName = goat.Name;
+    let goatName = goat.name;
     let goatVoteCount = goat.voteCount;
     let report = `The goat names ${goatName} got ${goatVoteCount} votes.`;
     let goatLI = document.createElement("li");
